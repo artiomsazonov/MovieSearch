@@ -7243,7 +7243,7 @@ input {
   border: 3px solid #dfdcd5;
   border-radius: 10px; }
 
-.search-btn, .cross {
+.search-btn, .cross, .loading {
   border: none;
   height: 42px;
   width: 42px;
@@ -7257,7 +7257,15 @@ input {
 .cross {
   right: 0; }
 
-button:before {
+.loading {
+  height: 42px;
+  width: 100px;
+  background-color: #75656b;
+  margin-left: 93px;
+  color: white;
+  border-radius: 10px; }
+
+.search-btn:before {
   content: "\f002";
   font-family: FontAwesome;
   font-size: 20px;

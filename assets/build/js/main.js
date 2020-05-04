@@ -19857,33 +19857,42 @@ function VKI_getStyle(obj, styleProp) {
 }
 const containetPage = document.getElementById("pageContainer")
 
-function getCategory() {
+
+
+
+// fetch
+let url = 'https://www.omdbapi.com/?s=man&apikey=4a3b711b'
+
+getData()
+
+function getData() {
+    fetch(url)
+        .then(response => response.json())
+        .then(function (json) {
+            pushInner(json);
+        })
+        // .then(function () {
+        //     inc()
+        // })
+        // .catch(e => {
+        //     console.log(e);
+        //     return e;
+        // });
+}
+
+function pushInner(news) {
     removeCards()
-    for (let i = 0; i < cards[0].length; i++) {
-        let div = document.createElement('div')
-        div.innerHTML = "<img src=img/" + i + ".jpg><div class='caption'><h3>" + cards[0][i] + "</h3></div>"
-        div.className = "thumbnail " + cards[0][i];
+    for (let i = 0; i < news.Search.length; i++) {
+        let div = document.createElement('div')        
+        div.className = "thumbnail ";        
+        let title = news.Search[i].Title;
+        let img = news.Search[i].Poster;
+        //var id = news.Search[i].id     
+        div.innerHTML = "<img src=" + img + "><div class='caption'><h3>" + title + "</h3></div>"
         containetPage.appendChild(div)
     }
-}
-getCategory()
+};
 
-
-// burger-menu
-
-let menu = document.querySelector(".burger-menu");
-let button = menu.querySelector(".burger-menu__button");
-let overlay = menu.querySelector(".burger-menu__overlay")
-let nav = menu.querySelector(".burger-menu__nav")
-button.onclick = toggleMenu;
-overlay.onclick = toggleMenu;
-nav.onclick = toggleMenu;
-function toggleMenu() {
-    menu.classList.toggle('burger-menu_active');
-    if (menu.classList.contains('burger-menu_active')) {
-        document.querySelector('body').style.overflow = 'hidden'
-    } else document.querySelector('body').style.overflow = 'visible'
-}
 // remove
 function removeCards() {
     let div = document.querySelectorAll('.thumbnail')
