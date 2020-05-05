@@ -29,17 +29,21 @@ function pushRaiting(){
 }
 function pushInner(news) {
    removeCards()
-    for (let i = 0; i < news.Search.length; i++) {
-        let div = document.createElement('div')        
-        div.className = "movie";        
+   let corusel = document.createElement('div')   
+   corusel.className ="owl-carousel owl-theme"
+   containetPage.appendChild(corusel)
+    for (let i = 0; i < news.Search.length; i++) {        
+        let div2 = document.createElement('div')   
+        div2.className = "movie item";        
         let title = news.Search[i].Title;
         let img = news.Search[i].Poster;
         let year = news.Search[i].Year 
-        let id = news.Search[i].imdbID 
-        div.innerHTML = "<div class='caption'><h3>" + title + "</h3></div><img src=" + img + "><div class='caption'><p>" + year + "</p><p class='"+id+" id'>" + id + "</p></div>"
-        containetPage.appendChild(div)
+        let id = news.Search[i].imdbID         
+        div2.innerHTML = "<div class='caption'><h3>" + title + "</h3></div><img src=" + img + "><div class='caption'><p>" + year + "</p><p class='"+id+" id'>" + id + "</p></div>"
+        corusel.appendChild(div2)
     }
    pushRaiting()
+  setTimeout( owl,300)
 };
 
 // remove
@@ -47,6 +51,10 @@ function removeCards() {
     let div = document.querySelectorAll('.movie')
     for (let j = 0; j < div.length; j++) {
         div[j].remove();
+    }
+    let x = document.querySelectorAll(".owl-carousel");
+    for (let i = 0; i < x.length; i++) {
+        x[i].remove();
     }
 }
 
@@ -65,5 +73,24 @@ function getSearchMovie(name) {
         .then(response => response.json())
         .then(function (json) {
             pushInner(json);
-        })      
+        })    
+          
 }
+// Corusel
+function owl(){
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:2,
+    nav:false,
+    responsive:{
+        0:{
+            items:1
+        },
+        650:{
+            items:2
+        },
+        1000:{
+            items:3
+        }
+    }
+})}

@@ -89,14 +89,10 @@ right: 0;
 input:focus {
   border-color: #311c24;
 }
-//
+
 #pageContainer {
   width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: center;
+  margin: 0 auto; 
   padding-top: 20px;
 }
 
@@ -131,7 +127,9 @@ input:focus {
     height: 420px;
     transition: 1s;  
 }
-
+.id{  
+  background: url('../img/star.svg') 88px 0px / 12% no-repeat;
+}
 
 @media screen and (max-width: 1200px) {
 
@@ -163,6 +161,13 @@ input:focus {
   top: 46px;
   left: 0;
   }
+  .movie { 
+    width: 280px;
+    img  {
+      width: 280px;   
+      height: 400px;
+      transition: 1s;    
+  }}
 }
 
 .none{
