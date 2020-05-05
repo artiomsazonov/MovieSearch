@@ -19,6 +19,5 @@
 //= ../../../node_modules/bootstrap/js/dist/toast.js
 
 // Импортируем другие js-файлы
-//= cards.js
 //= keyboard.js
 //= my.js
