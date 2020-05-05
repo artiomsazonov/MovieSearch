@@ -141,6 +141,29 @@ input:focus {
   }
 }
 
+@media screen and (max-width: 820px) {
+  form {
+    position: relative;
+    width: 70%;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 650px) {
+  #pageContainer {
+    padding-top: 40px;
+  }
+  form {
+    width: 90%;}
+  .loading{
+    top: 46px;  
+    left: 0;    
+  }
+  .keyboardInputInitiator{ 
+  position: absolute;
+  top: 46px;
+  left: 0;
+  }
+}
 
 .none{
   display: none;
