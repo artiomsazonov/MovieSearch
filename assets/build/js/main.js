@@ -19870,27 +19870,38 @@ function getData() {
         .then(response => response.json())
         .then(function (json) {
             pushInner(json);
-        })
-        // .then(function () {
-        //     inc()
-        // })
-        // .catch(e => {
-        //     console.log(e);
-        //     return e;
-        // });
+        })      
+}
+let cas=[]
+function getRating(id) {
+      fetch(`https://www.omdbapi.com/?i=${id}&apikey=d3f916db`)
+      .then(response => response.json())
+      .then(function (json) {
+        let x = document.querySelector('.'+id)
+        x.textContent= json.imdbRating           
+    })   
 }
 
+function pushRaiting(){
+    let id = document.querySelectorAll('.id')
+    console.log(id[0].textContent)
+    for(let i=0; i<id.length;i++){
+        getRating(id[i].textContent) 
+    }
+}
 function pushInner(news) {
     removeCards()
     for (let i = 0; i < news.Search.length; i++) {
         let div = document.createElement('div')        
-        div.className = "thumbnail ";        
+        div.className = "movie";        
         let title = news.Search[i].Title;
         let img = news.Search[i].Poster;
-        //var id = news.Search[i].id     
-        div.innerHTML = "<img src=" + img + "><div class='caption'><h3>" + title + "</h3></div>"
+        let year = news.Search[i].Year 
+        let id = news.Search[i].imdbID 
+        div.innerHTML = "<div class='caption'><h3>" + title + "</h3></div><img src=" + img + "><div class='caption'><p>" + year + "</p><p class='"+id+" id'>" + id + "</p></div>"
         containetPage.appendChild(div)
     }
+    pushRaiting()
 };
 
 // remove
@@ -19911,7 +19922,7 @@ function getWord(n) {
         divWord.className = cards[n][i].word;
         let rotate = document.createElement('div')
         rotate.className = 'two'
-        divWord.innerHTML = "<div class='flip-container'><div class='flipper'><div class='front'><div class='box1'><img src=" + cards[n][i].image + "><div class='caption'><h3>" + cards[n][i].word + "</h3></div></div></div><div class='back'><div class='box2'><img src=" + cards[n][i].image + "><div class='caption'><h3>" + cards[n][i].translation + "</h3></div></div></div></div></div>"
+        divWord.innerHTML = "<div class='flip-container'><div class='front'><div class='box1'><img src=" + cards[n][i].image + "><div class='caption'><h3>" + cards[n][i].word + "</h3></div></div></div><div class='back'><div class='box2'><img src=" + cards[n][i].image + "><div class='caption'><h3>" + cards[n][i].translation + "</h3></div></div></div></div></div>"
         divWord.setAttribute('onclick', "new Audio(src='img/" + cards[n][i].audioSrc + "').play()");
         rotate.innerHTML = "<img src='img/rotate.jpg'>"
         containetPage.appendChild(cardWord)
