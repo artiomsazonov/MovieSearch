@@ -102,7 +102,7 @@
   color: #444444; }
 
 .keyboardInputInitiator {
-  margin: 4px 0 0 10px;
+  margin: 4px 0 2px 10px;
   vertical-align: middle;
   cursor: pointer;
   position: absolute;
@@ -389,7 +389,8 @@ form {
     height: 42px;
     padding-left: 40px;
     border: 3px solid #dfdcd5;
-    border-radius: 10px; }
+    border-radius: 10px;
+    outline: none !important; }
   form .search-btn,
   form .cross,
   form .loading {
@@ -409,9 +410,10 @@ form {
     height: 42px;
     width: 100px;
     background-color: #75656b;
-    margin-left: 93px;
     color: white;
-    border-radius: 10px; }
+    border-radius: 10px;
+    right: -21%;
+    transition: .3s; }
   form .search-btn:before {
     content: "\f002";
     font-family: FontAwesome;
@@ -426,7 +428,7 @@ form {
   padding-top: 20px; }
   #pageContainer .movie {
     width: 236px;
-    height: 385px;
+    height: 415px;
     border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     color: #212529;
@@ -461,7 +463,13 @@ form {
 @media screen and (max-width: 1200px) {
   .container,
   #pageContainer {
-    width: 100%; } }
+    width: 100%; }
+  form .loading {
+    right: -25%; } }
+
+@media screen and (max-width: 991px) {
+  form .loading {
+    right: -35%; } }
 
 @media screen and (max-width: 820px) {
   .keyboardInputInitiator {
