@@ -15115,7 +15115,7 @@ function pushInner(news) {
         corusel.appendChild(div2)
     }
    pushRaiting()
-  setTimeout( owl,300)
+  setTimeout( owlCorusel,300)
 };
 
 // remove
@@ -15132,12 +15132,23 @@ function removeCards() {
 
 // search
 
-let search = document.querySelector(".loading")
+let search = document.querySelector(".loading");
+let searchIcon = document.querySelector(".search-btn");
+let input = document.querySelector('input');
 search.onclick = function () { getMovie() }
+searchIcon.onclick = function () { getMovie();}
+input.addEventListener("keydown", function(event) {
+    if (event.which == 13 || event.keyCode == 13) {
+        getMovie()
+        return false;
+    }
+    return true;
+});
 function getMovie() {
     event.preventDefault()
     let searchValue = document.querySelector('input').value
     getSearchMovie(searchValue)
+    clearInputs();
 };
 function getSearchMovie(name) {
     
@@ -15148,8 +15159,18 @@ function getSearchMovie(name) {
         })    
           
 }
+
+function clearInputs() {  
+            input.value = "";   
+}
+let cross = document.querySelector(".cross")
+cross.addEventListener('click', function () {
+    event.preventDefault()
+    clearInputs()
+})
+
 // Corusel
-function owl(){
+function owlCorusel(){
 $('.owl-carousel').owlCarousel({
     loop:true,
     margin:2,
@@ -15162,7 +15183,9 @@ $('.owl-carousel').owlCarousel({
             items:2
         },
         1000:{
-            items:3
+            items:4
         }
     }
 })}
+
+//

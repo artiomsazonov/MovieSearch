@@ -357,7 +357,7 @@
 .header {
   background-image: url(../img/back.jpg); }
   .header h1 {
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     color: #fff; }
 
@@ -365,10 +365,9 @@
   background-image: url(../img/back.jpg); }
   .footer .footer-flex {
     display: flex;
-    justify-content: space-between;
-    padding-top: 5px; }
+    justify-content: space-between; }
   .footer h5 {
-    margin: 10px;
+    margin: 2px 0 0 0;
     text-align: left;
     color: #fff; }
   .footer .gitIcon {
@@ -403,7 +402,8 @@ input {
   width: 42px;
   position: absolute;
   top: 0;
-  cursor: pointer; }
+  cursor: pointer;
+  outline: none !important; }
 
 .search-btn {
   left: 0; }
@@ -434,7 +434,8 @@ input:focus {
   padding-top: 20px; }
 
 .movie {
-  width: 300px;
+  width: 236px;
+  height: 385px;
   border-radius: 5px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   color: #212529;
@@ -451,16 +452,25 @@ input:focus {
 .movie:hover {
   box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.16), 12px 12px 18px 0 rgba(0, 0, 0, 0.12); }
 
-.caption {
-  padding-top: 20px; }
+.caption h3 {
+  font-size: 18px;
+  text-decoration: underline;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.caption p {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.7; }
 
 .movie img {
-  width: 300px;
-  height: 420px;
+  height: 305px;
   transition: 1s; }
 
 .id {
-  background: url("../img/star.svg") 88px 0px/12% no-repeat; }
+  background: url("../img/star.svg") 80px 0px/10% no-repeat; }
 
 @media screen and (max-width: 1200px) {
   .container,
