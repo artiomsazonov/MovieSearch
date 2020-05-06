@@ -106,7 +106,8 @@ form {
     border-color: #311c24;
   }
 }
-.error{
+
+.error {
   color: red;
   font-weight: 500;
   padding-left: 130px;
@@ -119,7 +120,7 @@ form {
 
   .movie {
     width: 236px;
-    height: 415px;
+    height: 435px;
     border-radius: 5px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     color: #212529;
@@ -130,12 +131,11 @@ form {
     font-weight: 400;
     text-align: center;
     margin: 20px 25px;
-    cursor: pointer;
     -webkit-transition: .3s;
     transition: .3s;
 
     img {
-      height: 305px;
+      height: 345px;
       transition: 1s;
     }
 
@@ -146,17 +146,23 @@ form {
         font-weight: 700;
         white-space: nowrap;
         overflow: hidden;
+        cursor: pointer;
+
+        a {
+          color: black;
+        }
       }
 
       p {
-        font-size: 14px;
+        font-size: 15px;
         margin: 0;
         font-weight: 700;
-        line-height: 1.7;
+        padding:  10px 0 2px 0;
+        line-height: 1;
       }
 
       .id {
-        background: url('../img/star.svg') 80px 0px / 10% no-repeat;
+        background: url('../img/star.svg') 75px 2px/11% no-repeat;
       }
     }
   }
@@ -166,7 +172,45 @@ form {
   }
 }
 
+// prelouder
+#p_prldr {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../img/back.jpg);
+  z-index: 30;
 
+  .contpre {
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    margin-left: -125px;
+    margin-top: -75px;
+    color: #fff;
+    font-size: 80px;
+    letter-spacing: -2px;
+    text-align: center;
+    line-height: 50px;
+
+    .svg_anm {
+      position: absolute;
+      width: 41px;
+      height: 41px;
+      background: url(../img/circles.svg) center center no-repeat;
+      background-size: 41px;
+      margin: -16px 0 0 -16px;
+    }
+
+    small {
+      font-size: 45px;
+    }
+
+  }
+}
 
 @media screen and (max-width: 1200px) {
 
@@ -174,12 +218,14 @@ form {
   #pageContainer {
     width: 100%;
   }
+
   form {
     .loading {
       right: -25%;
     }
   }
 }
+
 @media screen and (max-width: 991px) {
   form {
     .loading {
@@ -187,6 +233,7 @@ form {
     }
   }
 }
+
 @media screen and (max-width: 820px) {
   .keyboardInputInitiator {
     display: none;

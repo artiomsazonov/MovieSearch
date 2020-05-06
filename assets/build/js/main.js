@@ -15070,12 +15070,14 @@ animateIn:!1},e.prototype.swap=function(){if(1===this.core.settings.items&&a.sup
 	}
 
 })(window.Zepto || window.jQuery, window, document);
+
+
 const containetPage = document.getElementById("pageContainer")
 // fetch
 let url = 'https://www.omdbapi.com/?s=man&apikey=4a3b711b'
 
 getData()
-
+prelouder()
 function getData() {
     fetch(url)
         .then(response => response.json())
@@ -15111,11 +15113,12 @@ function pushInner(news) {
         let img = news[i].Poster;
         let year = news[i].Year
         let id = news[i].imdbID
-        div2.innerHTML = "<div class='caption'><h3>" + title + "</h3></div><img src=" + img + "><div class='caption'><p>" + year + "</p><p class='" + id + " id'>" + id + "</p></div>"
+        div2.innerHTML = "<div class='caption'><h3><a href='https://www.imdb.com/title/" + id + "/' target='_blank'>" + title + "</a></h3></div><img src=" + img + "><div class='caption'><p>" + year + "</p><p class='" + id + " id'>" + id + "</p></div>"
         corusel.appendChild(div2)
     }
     pushRaiting()
-    setTimeout(owlCorusel, 300)
+    prelouder()
+    setTimeout(owlCorusel, 400)
 };
 
 // remove
@@ -15129,13 +15132,20 @@ function removeCards() {
         x[i].remove();
     }
 }
-
+// prelouder
+function prelouder() {
+    let preloader = document.getElementById('p_prldr');
+    preloader.classList.remove('none');
+    window.setTimeout(function () {
+        preloader.classList.add('none');
+    }, 500);
+}
 // search
 
 let search = document.querySelector(".loading");
 let searchIcon = document.querySelector(".search-btn");
 let input = document.querySelector('input');
-search.onclick = function () { getMovie() }
+search.onclick = function () { getMovie(); }
 searchIcon.onclick = function () { getMovie(); }
 input.addEventListener("keydown", function (event) {
     if (event.which == 13 || event.keyCode == 13) {
@@ -15148,19 +15158,40 @@ let error = document.querySelector('.error')
 function getMovie() {
     event.preventDefault()
     let searchValue = document.querySelector('input').value
-    error.innerHTML='No results for "'+searchValue+'"'
-    getSearchMovie(searchValue)
-    clearInputs();
+    error.innerHTML = 'No results for "' + searchValue + '"'
+    checkLanguage(searchValue)
+
 };
+function checkLanguage(word) {
+    if (/^[а-яё]+$/i.test(word)) {
+        let txt = document.querySelector('input')
+        var request = new XMLHttpRequest();
+        var text = encodeURIComponent(word);
+        var key = "trnsl.1.1.20200506T144225Z.cdbaf785b66148d2.1647f625bc419ac1eafd91f742de43be8cfb34c6";
+        var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + key + "&text=" + text + "&lang=ru-en&format=plain&options=1"
+        request.open('GET', url, true);
+        request.onload = function () {
+            if (request.status >= 200 && request.status < 400) {
+                var data = JSON.parse(request.responseText);
+                txt.value = data.text;
+                getSearchMovie(txt.value);
+                txt.value = 'Showing results for  "'+ word+'" (' + data.text + ')';
+            }
+        };
+        request.send();
+    } else {
+        getSearchMovie(word)
+    }
+}
 function getSearchMovie(name) {
     fetch(`https://www.omdbapi.com/?s=${name}&apikey=d3f916db`)
         .then(response => response.json())
-        .then(function (json) { 
-            if(json.Search){ 
-                error.classList.add('none');          
-            pushInner(json.Search);
+        .then(function (json) {
+            if (json.Search) {
+                error.classList.add('none');
+                pushInner(json.Search);
             }
-            else{                
+            else {
                 error.classList.remove('none');
             }
         })
@@ -15169,6 +15200,7 @@ function getSearchMovie(name) {
 function clearInputs() {
     input.value = "";
 }
+clearInputs()
 let cross = document.querySelector(".cross")
 cross.addEventListener('click', function () {
     event.preventDefault()

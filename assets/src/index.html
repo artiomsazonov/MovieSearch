@@ -6,11 +6,15 @@
 </head>
 
 <body>
+    <div id="p_prldr">
+        <div class="contpre"><span class="svg_anm"></span><br>Wait<br><small>while loading</small></div>
+    </div>
+
     //= template/header.html
     <div class="search">
         <div class="container">
             <form>
-                <input type="text" placeholder="Search movie" class="keyboardInput">
+                <input type="text" placeholder="Search movie" class="keyboardInput" autofocus>
                 <button type="submit" class="search-btn"></button>
                 <button class="cross fa fa-times"></button>
                 <button class="loading">Search</button>
@@ -18,11 +22,11 @@
             <div class="error none">No results for "input value"</div>
         </div>
     </div>
-<main>
-    <div id ="pageContainer">
-    </div>
-</main>
-   
+    <main>
+        <div id="pageContainer">
+        </div>
+    </main>
+
 
     //= template/footer.html
 </body>
