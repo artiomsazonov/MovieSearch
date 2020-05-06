@@ -8,7 +8,7 @@ function getData() {
     fetch(url)
         .then(response => response.json())
         .then(function (json) {
-            pushInner(json);
+            pushInner(json.Search);
         })
 }
 
@@ -32,13 +32,13 @@ function pushInner(news) {
     let corusel = document.createElement('div')
     corusel.className = "owl-carousel owl-theme"
     containetPage.appendChild(corusel)
-    for (let i = 0; i < news.Search.length; i++) {
+    for (let i = 0; i < news.length; i++) {
         let div2 = document.createElement('div')
         div2.className = "movie item";
-        let title = news.Search[i].Title;
-        let img = news.Search[i].Poster;
-        let year = news.Search[i].Year
-        let id = news.Search[i].imdbID
+        let title = news[i].Title;
+        let img = news[i].Poster;
+        let year = news[i].Year
+        let id = news[i].imdbID
         div2.innerHTML = "<div class='caption'><h3>" + title + "</h3></div><img src=" + img + "><div class='caption'><p>" + year + "</p><p class='" + id + " id'>" + id + "</p></div>"
         corusel.appendChild(div2)
     }
@@ -72,20 +72,26 @@ input.addEventListener("keydown", function (event) {
     }
     return true;
 });
+let error = document.querySelector('.error')
 function getMovie() {
     event.preventDefault()
     let searchValue = document.querySelector('input').value
+    error.innerHTML='No results for "'+searchValue+'"'
     getSearchMovie(searchValue)
     clearInputs();
 };
 function getSearchMovie(name) {
-
     fetch(`https://www.omdbapi.com/?s=${name}&apikey=d3f916db`)
         .then(response => response.json())
-        .then(function (json) {
-            pushInner(json);
+        .then(function (json) { 
+            if(json.Search){ 
+                error.classList.add('none');          
+            pushInner(json.Search);
+            }
+            else{                
+                error.classList.remove('none');
+            }
         })
-
 }
 
 function clearInputs() {
