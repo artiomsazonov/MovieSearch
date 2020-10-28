@@ -15072,7 +15072,7 @@ animateIn:!1},e.prototype.swap=function(){if(1===this.core.settings.items&&a.sup
 })(window.Zepto || window.jQuery, window, document);
 
 
-const containetPage = document.getElementById("pageContainer")
+var containetPage = document.getElementById("pageContainer")
 // fetch
 let url = 'https://www.omdbapi.com/?s=man&apikey=4a3b711b'
 
@@ -15163,22 +15163,18 @@ function getMovie() {
 
 };
 function checkLanguage(word) {
-    if (/^[а-яё]+$/i.test(word)) {
-        let txt = document.querySelector('input')
-        var request = new XMLHttpRequest();
-        var text = encodeURIComponent(word);
-        var key = "trnsl.1.1.20200506T144225Z.cdbaf785b66148d2.1647f625bc419ac1eafd91f742de43be8cfb34c6";
-        var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + key + "&text=" + text + "&lang=ru-en&format=plain&options=1"
-        request.open('GET', url, true);
-        request.onload = function () {
-            if (request.status >= 200 && request.status < 400) {
-                var data = JSON.parse(request.responseText);
-                txt.value = data.text;
+     if (/^[а-яё]+$/i.test(word)) {
+         var text = encodeURIComponent(word);
+         var txt = document.querySelector('input')
+        fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=ru|en`)
+            .then(res => res.json())
+            .then(data => {
+                txt.value = data.responseData.translatedText;
                 getSearchMovie(txt.value);
-                txt.value = 'Showing results for  "'+ word+'" (' + data.text + ')';
-            }
-        };
-        request.send();
+                txt.value = 'Showing results for  "'+ word+'" (' + data.responseData.translatedText + ')';
+            })
+        
+       
     } else {
         getSearchMovie(word)
     }
