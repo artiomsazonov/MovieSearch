@@ -1,2 +1,2 @@
 # artiomsazonov-RS2020Q1
-Private repository for @artiomsazonov
+https://atiomsazonov-movie-search.netlify.app/
